@@ -38,10 +38,10 @@ Bizhawk
   - For the local path I recommend choosing somewhere not in OneDrive or on your desktop. Otherwise it should be fine. Once everything is entered click Clone. The process will take a while
 2) Once the repository is created go to Repository -> Open in Visual Studio Code
 3) In VS Code we need to make a couple changes, the websocket support has a couple bugs:
-  i) open this file: "\src\BizHawk.Client.Common\lua\CommonLibs\CommLuaLibrary.cs" and add this at line number 6 (under all the other using System.xyz lines. If you see this line there already, you can skip this part, maybe they fix it before you see this):
-  using System.Net.WebSockets;
-  ii) In the same file, find this section (lines 298-306 for me):
-    [LuaMethod("ws_close", "Close a websocket connection with a close status")]
+  i) open this file: "\src\BizHawk.Client.Common\lua\CommonLibs\CommLuaLibrary.cs" and add this at line number 6 (under all the other using System.xyz lines. If you see this line there already, you can skip this part, maybe they fix it before you see this):  
+  using System.Net.WebSockets;  
+  ii) In the same file, find this section (lines 298-306 for me):  
+    [LuaMethod("ws_close", "Close a websocket connection with a close status")]  
 		[LuaMethodExample("local ws_status = comm.ws_close(ws_id, close_status);")]
 		public void WebSocketClose(
 			string guid,
@@ -49,8 +49,8 @@ Bizhawk
 			string closeMessage)
 		{
 			if (\_websockets.TryGetValue(Guid.Parse(guid), out var wrapper)) wrapper.Close(status, closeMessage);
-		}
-     - and replace it with this:
+		}  
+     - and replace it with this:  
     [LuaMethod("ws_close", "Close a websocket connection with a close status")]
     [LuaMethodExample("local ws_status = comm.ws_close(ws_id, close_status);")]
 		public void WebSocketClose(
@@ -61,7 +61,7 @@ Bizhawk
 			if (\_websockets.TryGetValue(Guid.Parse(guid), out var wrapper)) wrapper.Close((WebSocketCloseStatus)status, closeMessage);
 		}    
 4) In the VS Code menu, go to Terminal -> New Terminal
-5) In the Terminal at the bottom of the window, paste the following command and hit Enter (this may take some time):
+5) In the Terminal at the bottom of the window, paste the following command and hit Enter (this may take some time):  
 dotnet build -p:MachineExtraCompilationFlag=ENABLE_WEBSOCKETS
 6) Once done, you should find in the folder where you copied the bizhawk files, a folder called 'output', which contains the usual files and folders that you'd find in your typical Bizhawk installation.
 7) At this point, you should copy any save/save state/config data from your existing Bizhawk installation into the same locations in this new folder. Otherwise, it will be like a fresh Bizhawk installation with all default settings and keybindings.
