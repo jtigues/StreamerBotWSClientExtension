@@ -37,6 +37,7 @@ Bizhawk
 1) In Github Desktop, go to File -> Clone Repository. Go to the URL tab and provide the following URL: https://github.com/TASEmulators/BizHawk.git
   - For the local path I recommend choosing somewhere not in OneDrive or on your desktop. Otherwise it should be fine. Once everything is entered click Clone. The process will take a while
 2) Once the repository is created go to Repository -> Open in Visual Studio Code
+3) In the corner of Visual Studio, you will be prompted to install a couple packages/external downloads if you don't have them already. One of them is just Visual Studio's C# extension, and the other is .NET (dotnet), which we'll need to compile all the code into a new Bizhawk executable. FYI, you'll be taken to an external link to download .NET 
 3) In VS Code we need to make a couple changes, the websocket support has a couple bugs:
   i) open this file: "\src\BizHawk.Client.Common\lua\CommonLibs\CommLuaLibrary.cs" and add this at line number 6 (under all the other using System.xyz lines. If you see this line there already, you can skip this part, maybe they fix it before you see this):  
   using System.Net.WebSockets;  
